@@ -18,20 +18,16 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
       action: 'What are the advantages of using Next.js?',
     },
     {
-      title: 'Write code to',
-      label: `demonstrate djikstra's algorithm`,
-      action: `Write code to demonstrate djikstra's algorithm`,
+      title: 'Hãy viết code',
+      label: `giải thích thuật toán djikstra`,
+      action: `Hãy viết code giải thích thuật toán djikstra`,
     },
     {
-      title: 'Help me write an essay',
-      label: `about silicon valley`,
-      action: `Help me write an essay about silicon valley`,
+      title: 'Giúp tôi viết một bài luận',
+      label: `về Bác Hồ`,
+      action: `Giúp tôi viết một bài luận về Bác Hồ`,
     },
-    {
-      title: 'What is the weather',
-      label: 'in San Francisco?',
-      action: 'What is the weather in San Francisco?',
-    },
+    
   ];
 
   return (

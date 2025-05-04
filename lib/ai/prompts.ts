@@ -33,7 +33,7 @@ Do not update document right after creating it. Wait for user feedback or reques
 `;
 
 export const regularPrompt =
-  'You are a friendly assistant! Keep your responses concise and helpful.';
+  'Bạn là một trợ lí AI hữu dụng. Hãy trả lời câu hỏi thật chi tiết. Không tự lặp lại chính mình';
 
 export interface RequestHints {
   latitude: Geo['latitude'];
@@ -44,8 +44,6 @@ export interface RequestHints {
 
 export const getRequestPromptFromHints = (requestHints: RequestHints) => `\
 About the origin of user's request:
-- lat: ${requestHints.latitude}
-- lon: ${requestHints.longitude}
 - city: ${requestHints.city}
 - country: ${requestHints.country}
 `;
@@ -60,9 +58,10 @@ export const systemPrompt = ({
   const requestPrompt = getRequestPromptFromHints(requestHints);
 
   if (selectedChatModel === 'chat-model-reasoning') {
-    return `${regularPrompt}\n\n${requestPrompt}`;
+    return `${regularPrompt} /think`;
   } else {
-    return `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}`;
+    // Remove the artifact prompt if the model is not reasoning
+    return `${regularPrompt} /no_think`;
   }
 };
 

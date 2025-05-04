@@ -4,6 +4,9 @@ import {
   wrapLanguageModel,
 } from 'ai';
 import { xai } from '@ai-sdk/xai';
+import { createOpenAI, openai } from '@ai-sdk/openai';
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+
 import { isTestEnvironment } from '../constants';
 import {
   artifactModel,
@@ -11,6 +14,15 @@ import {
   reasoningModel,
   titleModel,
 } from './models.test';
+
+
+const qwen = createOpenAI({
+  compatibility: 'strict',
+  name: 'evaluate',
+  baseURL: 'https://45c3-14-0-20-159.ngrok-free.app/v1',
+  apiKey: 'm_a',
+});
+
 
 export const myProvider = isTestEnvironment
   ? customProvider({
@@ -23,15 +35,13 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': xai('grok-2-vision-1212'),
+        'chat-model': qwen('evaluate'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: xai('grok-3-mini-beta'),
+          model: qwen('evaluate'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'title-model': xai('grok-2-1212'),
-        'artifact-model': xai('grok-2-1212'),
+        'title-model': qwen('evaluate'),
+        'artifact-model':qwen('evaluate'),
       },
-      imageModels: {
-        'small-model': xai.image('grok-2-image'),
-      },
+
     });

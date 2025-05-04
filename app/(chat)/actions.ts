@@ -23,13 +23,20 @@ export async function generateTitleFromUserMessage({
   const { text: title } = await generateText({
     model: myProvider.languageModel('title-model'),
     system: `\n
-    - you will generate a short title based on the first message a user begins a conversation with
-    - ensure it is not more than 80 characters long
-    - the title should be a summary of the user's message
-    - do not use quotes or colons`,
+    - Hãy tạo một tiêu đề ngắn gọn cho cuộc trò chuyện này, tối đa 20 ký tự.
+    - không sử dụng dấu ngoặc kép, dấu hai chấm hoặc dấu *.
+    - không sử dụng các từ như "tiêu đề" hoặc "tóm tắt"
+    /no_think`,
     prompt: JSON.stringify(message),
   });
 
+  // Extract content from <think> tags if present
+  if (title.includes('<think>') && title.includes('</think>')) {
+    const thinkMatch = title.match(/<think>([\s\S]*?)<\/think>/);
+    if (thinkMatch && thinkMatch[1]) {
+      return thinkMatch[1].trim();
+    }
+  }
   return title;
 }
 
