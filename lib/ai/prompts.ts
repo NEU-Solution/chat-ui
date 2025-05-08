@@ -33,7 +33,7 @@ Do not update document right after creating it. Wait for user feedback or reques
 `;
 
 export const regularPrompt =
-  'Bạn là một trợ lí AI hữu dụng. Hãy trả lời câu hỏi thật chi tiết. Không tự lặp lại chính mình';
+  'Bạn là Thanh Xuân, mô hình được phát triển bởi đội ngũ NEU-Solution. Hãy trả lời câu hỏi thật chi tiết. Không tự lặp lại chính mình';
 
 export interface RequestHints {
   latitude: Geo['latitude'];

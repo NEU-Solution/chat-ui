@@ -15,14 +15,12 @@ import {
   titleModel,
 } from './models.test';
 
-
 const qwen = createOpenAI({
   compatibility: 'strict',
-  name: 'evaluate',
-  baseURL: 'https://45c3-14-0-20-159.ngrok-free.app/v1',
-  apiKey: 'm_a',
+  name: 'initial-sft',
+  baseURL: 'https://production.quanghung20gg.site/v1',
+  apiKey: 'm_a_ma',
 });
-
 
 export const myProvider = isTestEnvironment
   ? customProvider({
@@ -35,13 +33,12 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': qwen('evaluate'),
+        'chat-model': qwen('initial-sft'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: qwen('evaluate'),
+          model: qwen('initial-sft'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'title-model': qwen('evaluate'),
-        'artifact-model':qwen('evaluate'),
+        'title-model': qwen('initial-sft'),
+        'artifact-model': qwen('initial-sft'),
       },
-
     });
