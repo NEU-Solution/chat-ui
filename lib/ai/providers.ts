@@ -22,6 +22,14 @@ const qwen = createOpenAI({
   apiKey: 'm_a_ma',
 });
 
+
+const qwen3 = createOpenAI({
+  compatibility: 'strict',
+  name: 'thinking',
+  baseURL: 'https://thinking.quanghung20gg.site/v1',
+  apiKey: 'm_a_ma',
+});
+
 export const myProvider = isTestEnvironment
   ? customProvider({
       languageModels: {
@@ -35,7 +43,7 @@ export const myProvider = isTestEnvironment
       languageModels: {
         'chat-model': qwen('initial-sft'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: qwen('initial-sft'),
+          model: qwen3('thinking'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
         'title-model': qwen('initial-sft'),
